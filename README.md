@@ -1,9 +1,9 @@
 # AR-Projects using AI
 
-ProjectName: CheckITout
+ProjectName: IKEAme
 
-Description: An app that enables you to try on a cloath without actually putting it on.
+Description:
 
-How it works: Recognizes a person using Computer Vision and imports assets using ARCore
+How it works: 
 
 Technologies: Unity, Fusion 360, ARCore
