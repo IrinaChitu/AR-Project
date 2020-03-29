@@ -1,0 +1,4 @@
+#Sun Mar 29 20:12:24 EEST 2020
+base.0=/Users/tmarchitan/Documents/Personal/University/IP-Project/AR Project/Temp/gradleOut/launcher/build/intermediates/transforms/dexMerger/release/0
+path.0=classes.dex
+renamed.0=classes.dex
