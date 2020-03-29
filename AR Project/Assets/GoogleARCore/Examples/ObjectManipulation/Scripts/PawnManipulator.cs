@@ -28,6 +28,7 @@ namespace GoogleARCore.Examples.ObjectManipulation
     /// </summary>
     public class PawnManipulator : Manipulator
     {
+        public bool spawn = true;
         /// <summary>
         /// The first-person camera being used to render the passthrough camera image (i.e. AR
         /// background).
@@ -93,25 +94,28 @@ namespace GoogleARCore.Examples.ObjectManipulation
                 }
                 else
                 {
-                    // Instantiate game object at the hit pose.
-                    var gameObject = Instantiate(PawnPrefab, hit.Pose.position, hit.Pose.rotation);
+                    if (spawn == true)
+                    {
+                        var gameObject = Instantiate(PawnPrefab, hit.Pose.position, hit.Pose.rotation);
+                        spawn = false;
 
-                    // Instantiate manipulator.
-                    var manipulator =
-                        Instantiate(ManipulatorPrefab, hit.Pose.position, hit.Pose.rotation);
+                        // Instantiate manipulator.
+                        var manipulator =
+                            Instantiate(ManipulatorPrefab, hit.Pose.position, hit.Pose.rotation);
 
-                    // Make game object a child of the manipulator.
-                    gameObject.transform.parent = manipulator.transform;
+                        // Make game object a child of the manipulator.
+                        gameObject.transform.parent = manipulator.transform;
 
-                    // Create an anchor to allow ARCore to track the hitpoint as understanding of
-                    // the physical world evolves.
-                    var anchor = hit.Trackable.CreateAnchor(hit.Pose);
+                        // Create an anchor to allow ARCore to track the hitpoint as understanding of
+                        // the physical world evolves.
+                        var anchor = hit.Trackable.CreateAnchor(hit.Pose);
 
-                    // Make manipulator a child of the anchor.
-                    manipulator.transform.parent = anchor.transform;
+                        // Make manipulator a child of the anchor.
+                        manipulator.transform.parent = anchor.transform;
 
-                    // Select the placed object.
-                    manipulator.GetComponent<Manipulator>().Select();
+                        // Select the placed object.
+                        manipulator.GetComponent<Manipulator>().Select();
+                    }
                 }
             }
         }
