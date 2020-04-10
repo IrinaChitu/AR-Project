@@ -96,6 +96,8 @@ namespace GoogleARCore.Examples.ObjectManipulation
                 {
                     if (spawn == true)
                     {
+                        
+
                         var gameObject = Instantiate(PawnPrefab, hit.Pose.position, hit.Pose.rotation);
                         spawn = false;
 
@@ -106,6 +108,7 @@ namespace GoogleARCore.Examples.ObjectManipulation
                         // Make game object a child of the manipulator.
                         gameObject.transform.parent = manipulator.transform;
 
+
                         // Create an anchor to allow ARCore to track the hitpoint as understanding of
                         // the physical world evolves.
                         var anchor = hit.Trackable.CreateAnchor(hit.Pose);
@@ -115,6 +118,30 @@ namespace GoogleARCore.Examples.ObjectManipulation
 
                         // Select the placed object.
                         manipulator.GetComponent<Manipulator>().Select();
+
+                        Debug.LogWarning("Setez culoarea");
+
+                        gameObject.AddComponent<MeshRenderer>();
+
+                        var myRenderer = gameObject.GetComponent<MeshRenderer>();
+
+                    
+
+                        if (myRenderer == null)
+                        {
+                            Debug.LogWarning("Este null");
+                        }
+                        else
+                        {
+                            Debug.LogWarning("Nu este null");
+                            myRenderer.material.color = new Color(0, 1, 0, 1);
+                            Debug.LogWarning(myRenderer.material.color.ToString());
+                            Debug.LogWarning("Am setat culoarea");
+                        }
+
+
+                    
+
                     }
                 }
             }
