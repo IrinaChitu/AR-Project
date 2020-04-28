@@ -93,15 +93,29 @@ namespace GoogleARCore.Examples.ObjectManipulation
 				}
 				else
 				{
+					// // Material material = Resources.Load("MaterialTest", typeof(Material)) as Material;
+					// Mesh mesh = ((GameObject)Resources.Load (GlobalScript.selectedObject)).GetComponent<MeshFilter>().mesh;
+					//
+					// //Instantiate a new game object, and add mesh components so it's visible
+					// //We set the sharedMesh to the mesh we extracted from the prefab and the material
+					// //of the MeshRenderer component
+					// GameObject go = new GameObject(GlobalScript.selectedObject);
+					// MeshFilter meshFilter = go.AddComponent<MeshFilter>();
+					// meshFilter.sharedMesh = mesh;
+					// MeshRenderer meshRenderer = go.AddComponent<MeshRenderer>();
+					// meshRenderer.material = material;
 					Debug.Log(GlobalScript.selectedObject);
 					// Mesh mesh = Resources.Load(GlobalScript.selectedObject, Mesh);
 					// PawnPrefab.GetComponent<MeshFilter>().mesh = mesh;
 					// Debug.Log((GameObject)Resources.Load(GlobalScript.selectedObject));
-					PawnPrefab = Instantiate(Resources.Load(GlobalScript.selectedObject, typeof(GameObject))) as GameObject;
-					Debug.Log(PawnPrefab);
+					// CoffeeTable.obj
+					// GameObject myAsset = (GameObject)Instantiate(Resources.Load("Assets/GoogleARCore/Examples/ObjectManipulation/Prefabs/" +
+								   // GlobalScript.selectedObject));
+					// Debug.Log(myAsset);
 
 					// Instantiate game object at the hit pose.
 					// PawnPrefab = (GameObject)Instantiate(Resources.Load(GlobalScript.selectedObject));
+					// var gameObject = Instantiate(go, hit.Pose.position, hit.Pose.rotation);
 					var gameObject = Instantiate(PawnPrefab, hit.Pose.position, hit.Pose.rotation);
 					// Debug.Log(Resources.Load(GlobalScript.selectedObject);
 
