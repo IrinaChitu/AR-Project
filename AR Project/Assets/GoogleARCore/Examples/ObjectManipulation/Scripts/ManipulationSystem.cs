@@ -181,4 +181,6 @@ namespace GoogleARCore.Examples.ObjectManipulation
             SelectedObject = target;
         }
     }
+
+
 }

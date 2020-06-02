@@ -18,6 +18,7 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
+
 namespace GoogleARCore.Examples.ObjectManipulation
 {
     using GoogleARCore;
@@ -33,6 +34,8 @@ namespace GoogleARCore.Examples.ObjectManipulation
     /// <summary>
     /// Controls the placement of objects via a tap gesture.
     /// </summary>
+    /// 
+
     public class PawnManipulator : Manipulator
     {
         public bool spawn = true;
@@ -167,7 +170,7 @@ namespace GoogleARCore.Examples.ObjectManipulation
 
         public IEnumerator getRequest(byte[] imageBytes)
         {
-            UnityWebRequest unityWebRequest = new UnityWebRequest("http://colorapi-env.eba-6nu7diz5.eu-west-3.elasticbeanstalk.com/?fbclid=IwAR33tXPifJ4ZIM59W7_m-faAK3909T2GgV6i3TstlnBLxcfSUrkQX3aBDHU", "POST");
+            UnityWebRequest unityWebRequest = new UnityWebRequest("http://colorapi-env.eba-6nu7diz5.eu-west-3.elasticbeanstalk.com/upload", "POST");
             unityWebRequest.uploadHandler = new UploadHandlerRaw(imageBytes);
             unityWebRequest.SetRequestHeader("content-Type", "image/jpeg");
 
@@ -185,11 +188,35 @@ namespace GoogleARCore.Examples.ObjectManipulation
                 Debug.Log("Form upload complete! Status Code: " + unityWebRequest.responseCode);
 
                 string response = unityWebRequest.downloadHandler.text;
-                Debug.LogWarning("Am primit: " + response);
+
+                var json = SimpleJSON.JSON.Parse(response);
+                
+
+                Debug.LogWarning("Am primit: ");
+                Debug.LogWarning(response);
+                Debug.LogWarning(json);
+                Debug.LogWarning(json["colors"]);
+                Debug.LogWarning(json["colors"].Values);
+                Debug.LogWarning(json["message"]);
+
+                var newColors = new List<Color32>();
+                foreach (var color in json["colors"])
+                {
+                    Debug.LogWarning((float)color.Value[0]);
+                    newColors.Add(new Color32((byte)color.Value[0], (byte)color.Value[1], (byte)color.Value[2], 255));
+                }
+                SharedData.Colours = newColors;
+
             }
 
-            SharedData.Colours = new List<Color>() { Color.red, Color.blue, Color.green };
-
         }
+
+        //[Serializable]
+        //public class ResponseObj
+        //{
+        //    public string message;
+        //    public double[][] colors;
+        //}
+
     }
 }

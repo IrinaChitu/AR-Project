@@ -105,7 +105,9 @@
      <Compile Include="Assets\GoogleARCore\Examples\ObjectManipulation\Scripts\Manipulators\TranslationManipulator.cs" />
      <Compile Include="Assets\GoogleARCore\Examples\ObjectManipulation\Scripts\ObjectManipulationController.cs" />
      <Compile Include="Assets\GoogleARCore\Examples\ObjectManipulation\Scripts\PawnManipulator.cs" />
+     <Compile Include="Assets\GoogleARCore\Examples\ObjectManipulation\Scripts\ResponseObject.cs" />
      <Compile Include="Assets\GoogleARCore\Examples\ObjectManipulation\Scripts\SharedData.cs" />
+     <Compile Include="Assets\GoogleARCore\Examples\ObjectManipulation\Scripts\SimpleJSON.cs" />
      <Compile Include="Assets\GoogleARCore\SDK\InstantPreview\Scripts\InstantPreviewInput.cs" />
      <Compile Include="Assets\GoogleARCore\SDK\InstantPreview\Scripts\InstantPreviewManager.cs" />
      <Compile Include="Assets\GoogleARCore\SDK\InstantPreview\Scripts\InstantPreviewTrackedPoseDriver.cs" />

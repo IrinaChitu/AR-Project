@@ -4,6 +4,6 @@ using UnityEngine;
 
 public static class SharedData
 {
-    public static List<Color> Colours { get; set; } = new List<Color>();
+    public static List<Color32> Colours { get; set; } = new List<Color32>();
 
 }
