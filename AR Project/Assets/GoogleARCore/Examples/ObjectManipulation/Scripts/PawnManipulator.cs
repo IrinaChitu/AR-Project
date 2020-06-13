@@ -96,15 +96,17 @@ namespace GoogleARCore.Examples.ObjectManipulation
 					// // Material material = Resources.Load("MaterialTest", typeof(Material)) as Material;
 					// Mesh mesh = ((GameObject)Resources.Load (GlobalScript.selectedObject)).GetComponent<MeshFilter>().mesh;
 					//
-					// //Instantiate a new game object, and add mesh components so it's visible
-					// //We set the sharedMesh to the mesh we extracted from the prefab and the material
-					// //of the MeshRenderer component
+					//Instantiate a new game object, and add mesh components so it's visible
+					//We set the sharedMesh to the mesh we extracted from the prefab and the material
+					//of the MeshRenderer component
 					// GameObject go = new GameObject(GlobalScript.selectedObject);
 					// MeshFilter meshFilter = go.AddComponent<MeshFilter>();
 					// meshFilter.sharedMesh = mesh;
 					// MeshRenderer meshRenderer = go.AddComponent<MeshRenderer>();
 					// meshRenderer.material = material;
-					Debug.Log(GlobalScript.selectedObject);
+					// Debug.Log("Selected object is " + GlobalScript.selectedObject);
+					// Debug.Log(GlobalScript.selectedObject);
+					PawnPrefab = Resources.Load<GameObject>(GlobalScript.selectedObject) as GameObject;
 					// Mesh mesh = Resources.Load(GlobalScript.selectedObject, Mesh);
 					// PawnPrefab.GetComponent<MeshFilter>().mesh = mesh;
 					// Debug.Log((GameObject)Resources.Load(GlobalScript.selectedObject));

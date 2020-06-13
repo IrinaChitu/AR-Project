@@ -10,7 +10,8 @@ public class GlobalScript : MonoBehaviour
 	public void SetObjectForManipulation(string objectName)
 	{
 		selectedObject = objectName;
-		Debug.Log(selectedObject);
+		Debug.Log("Parameter object is " + objectName);
+		Debug.Log("Selected object is " + selectedObject);
 	}
 
 	public void OpenObjectManipulationScene()
@@ -39,6 +40,8 @@ public class GlobalScript : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-
+		if (Input.GetKey(KeyCode.Escape)) {
+			Application.Quit();
+		}
 	}
 }
