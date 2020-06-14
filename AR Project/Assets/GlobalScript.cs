@@ -17,16 +17,6 @@ public class GlobalScript : MonoBehaviour
 	public void OpenObjectManipulationScene()
 	{
 		Debug.Log(GlobalScript.selectedObject);
-		// // Material material = Resources.Load("MaterialTest", typeof(Material)) as Material;
-		// Mesh mesh = ((GameObject)Resources.Load (GlobalScript.selectedObject)).GetComponent<MeshFilter>().mesh;
-		//
-		// //Instantiate a new game object, and add mesh components so it's visible
-		// //We set the sharedMesh to the mesh we extracted from the prefab and the material
-		// //of the MeshRenderer component
-		// GameObject go = new GameObject(GlobalScript.selectedObject);
-		// MeshFilter meshFilter = go.AddComponent<MeshFilter>();
-		// meshFilter.sharedMesh = mesh;
-		// MeshRenderer meshRenderer = go.AddComponent<MeshRenderer>();
 
 		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
 	}

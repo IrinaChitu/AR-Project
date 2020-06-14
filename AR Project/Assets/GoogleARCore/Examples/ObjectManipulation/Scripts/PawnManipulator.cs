@@ -133,15 +133,6 @@ namespace GoogleARCore.Examples.ObjectManipulation
 
                         Debug.Log("Setez culoarea");
 
-                        //yourMesh = PawnPrefab.GetComponent<MeshFilter>();
-                        //yourMesh.sharedMesh = Resources.Load<Mesh>("MeshBody1");
-
-                        //Debug.Log(yourMesh);
-
-                        //yourMesh.GetComponent<Renderer>().material.color = new Color(0, 1, 0, 1);
-
-                        //var cubeRenderer = gameObject.GetComponent<Renderer>();
-
                         var allComponents = gameObject.GetComponentsInChildren<Component>(true);
                         foreach (var component in allComponents)
                         {
