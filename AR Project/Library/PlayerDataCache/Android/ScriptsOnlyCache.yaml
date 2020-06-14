@@ -48,6 +48,8 @@ ScriptsOnlyBuild:
     - UnityEngine.UI.ScrollRect
     - UnityEngine.UI.Scrollbar
     - UnityEngine.UI.Text
+    com.unity.multiplayer-hlapi.Runtime.dll:
+    - UnityEngine.Networking.NetworkCallbacks
   sceneClasses:
     Assets/GoogleARCore/Examples/ObjectManipulation/Scenes/MainMenu.unity:
     - Class: 1
@@ -81,37 +83,37 @@ ScriptsOnlyBuild:
     - Class: 109
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 11246}
+      Script: {instanceID: 11948}
     - Class: 114
-      Script: {instanceID: 11502}
+      Script: {instanceID: 12196}
     - Class: 114
-      Script: {instanceID: 11508}
+      Script: {instanceID: 12202}
     - Class: 114
-      Script: {instanceID: 11554}
+      Script: {instanceID: 12248}
     - Class: 114
-      Script: {instanceID: 11874}
+      Script: {instanceID: 12568}
     - Class: 114
-      Script: {instanceID: 11952}
+      Script: {instanceID: 12646}
     - Class: 114
-      Script: {instanceID: 12072}
+      Script: {instanceID: 12766}
     - Class: 114
-      Script: {instanceID: 12112}
+      Script: {instanceID: 12806}
     - Class: 114
-      Script: {instanceID: 12368}
+      Script: {instanceID: 13062}
     - Class: 114
-      Script: {instanceID: 12632}
+      Script: {instanceID: 13322}
     - Class: 114
-      Script: {instanceID: 12648}
+      Script: {instanceID: 13338}
     - Class: 114
-      Script: {instanceID: 12930}
+      Script: {instanceID: 13616}
     - Class: 114
-      Script: {instanceID: 13262}
+      Script: {instanceID: 13940}
     - Class: 114
-      Script: {instanceID: 13486}
+      Script: {instanceID: 14160}
     - Class: 114
-      Script: {instanceID: 13672}
+      Script: {instanceID: 14344}
     - Class: 114
-      Script: {instanceID: 13774}
+      Script: {instanceID: 14446}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -156,65 +158,65 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 11246}
+      Script: {instanceID: 11948}
     - Class: 114
-      Script: {instanceID: 11502}
+      Script: {instanceID: 12196}
     - Class: 114
-      Script: {instanceID: 11554}
+      Script: {instanceID: 12248}
     - Class: 114
-      Script: {instanceID: 11708}
+      Script: {instanceID: 12402}
     - Class: 114
-      Script: {instanceID: 11874}
+      Script: {instanceID: 12568}
     - Class: 114
-      Script: {instanceID: 11936}
+      Script: {instanceID: 12630}
     - Class: 114
-      Script: {instanceID: 11976}
+      Script: {instanceID: 12670}
     - Class: 114
-      Script: {instanceID: 11986}
+      Script: {instanceID: 12680}
     - Class: 114
-      Script: {instanceID: 12008}
+      Script: {instanceID: 12702}
     - Class: 114
-      Script: {instanceID: 12072}
+      Script: {instanceID: 12766}
     - Class: 114
-      Script: {instanceID: 12294}
+      Script: {instanceID: 12988}
     - Class: 114
-      Script: {instanceID: 12480}
+      Script: {instanceID: 13170}
     - Class: 114
-      Script: {instanceID: 12616}
+      Script: {instanceID: 13306}
     - Class: 114
-      Script: {instanceID: 12632}
+      Script: {instanceID: 13322}
     - Class: 114
-      Script: {instanceID: 12660}
+      Script: {instanceID: 13350}
     - Class: 114
-      Script: {instanceID: 12734}
+      Script: {instanceID: 13420}
     - Class: 114
-      Script: {instanceID: 12746}
+      Script: {instanceID: 13432}
     - Class: 114
-      Script: {instanceID: 12854}
+      Script: {instanceID: 13540}
     - Class: 114
-      Script: {instanceID: 12944}
+      Script: {instanceID: 13630}
     - Class: 114
-      Script: {instanceID: 13034}
+      Script: {instanceID: 13716}
     - Class: 114
-      Script: {instanceID: 13086}
+      Script: {instanceID: 13768}
     - Class: 114
-      Script: {instanceID: 13248}
+      Script: {instanceID: 13926}
     - Class: 114
-      Script: {instanceID: 13262}
+      Script: {instanceID: 13940}
     - Class: 114
-      Script: {instanceID: 13266}
+      Script: {instanceID: 13944}
     - Class: 114
-      Script: {instanceID: 13370}
+      Script: {instanceID: 14048}
     - Class: 114
-      Script: {instanceID: 13422}
+      Script: {instanceID: 14098}
     - Class: 114
-      Script: {instanceID: 13478}
+      Script: {instanceID: 14152}
     - Class: 114
-      Script: {instanceID: 13662}
+      Script: {instanceID: 14334}
     - Class: 114
-      Script: {instanceID: 13718}
+      Script: {instanceID: 14390}
     - Class: 114
-      Script: {instanceID: 13774}
+      Script: {instanceID: 14446}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 120
@@ -1054,4 +1056,4 @@ ScriptsOnlyBuild:
   scenePathNames:
   - Assets/GoogleARCore/Examples/ObjectManipulation/Scenes/MainMenu.unity
   - Assets/GoogleARCore/Examples/ObjectManipulation/Scenes/ObjectManipulation.unity
-  playerPath: C:/Users/sandu.petrasco/Desktop/Faculte/Sem2/IP-Project/AR Project/test_f.apk
+  playerPath: /Users/tmarchitan/Desktop/final-project.apk
