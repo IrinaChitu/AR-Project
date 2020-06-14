@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/GoogleARCore/Examples/ObjectManipulation/Scenes/MainMenu.unity
+- path: Assets/GoogleARCore/Examples/ObjectManipulation/Scenes/ObjectManipulation.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0

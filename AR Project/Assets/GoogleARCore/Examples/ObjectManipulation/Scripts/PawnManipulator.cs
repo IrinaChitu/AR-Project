@@ -18,130 +18,216 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
+
 namespace GoogleARCore.Examples.ObjectManipulation
 {
-	using GoogleARCore;
-	using UnityEngine;
+    using GoogleARCore;
+    using UnityEngine;
+    using System.Collections;
+    using System.Collections.Generic;
+    using UnityEngine.Networking;
+    using System;
+    using System.IO;
+    using GoogleARCore.Examples.ComputerVision;
+    using UnityEngine.UI;
 
-	/// <summary>
-	/// Controls the placement of objects via a tap gesture.
-	/// </summary>
-	public class PawnManipulator : Manipulator
-	{
-		/// <summary>
-		/// The first-person camera being used to render the passthrough camera image (i.e. AR
-		/// background).
-		/// </summary>
-		public Camera FirstPersonCamera;
+    /// <summary>
+    /// Controls the placement of objects via a tap gesture.
+    /// </summary>
+    /// 
 
-		/// <summary>
-		/// A prefab to place when a raycast from a user touch hits a plane.
-		/// </summary>
-		public GameObject PawnPrefab;
+    public class PawnManipulator : Manipulator
+    {
+        public bool spawn = true;
+        /// <summary>
+        /// The first-person camera being used to render the passthrough camera image (i.e. AR
+        /// background).
+        /// </summary>
+        public Camera FirstPersonCamera;
 
-		/// <summary>
-		/// Manipulator prefab to attach placed objects to.
-		/// </summary>
-		public GameObject ManipulatorPrefab;
+        /// <summary>
+        /// A prefab to place when a raycast from a user touch hits a plane.
+        /// </summary>
+        public GameObject PawnPrefab;
 
-		/// <summary>
-		/// Returns true if the manipulation can be started for the given gesture.
-		/// </summary>
-		/// <param name="gesture">The current gesture.</param>
-		/// <returns>True if the manipulation can be started.</returns>
-		protected override bool CanStartManipulationForGesture(TapGesture gesture)
-		{
-			if (gesture.TargetObject == null)
-			{
-				return true;
-			}
+        /// <summary>
+        /// Manipulator prefab to attach placed objects to.
+        /// </summary>
+        public GameObject ManipulatorPrefab;
 
-			return false;
-		}
+        /// <summary>
+        /// Returns true if the manipulation can be started for the given gesture.
+        /// </summary>
+        /// <param name="gesture">The current gesture.</param>
+        /// <returns>True if the manipulation can be started.</returns>
+        protected override bool CanStartManipulationForGesture(TapGesture gesture)
+        {
+            if (gesture.TargetObject == null)
+            {
+                return true;
+            }
 
-		/// <summary>
-		/// Function called when the manipulation is ended.
-		/// </summary>
-		/// <param name="gesture">The current gesture.</param>
-		protected override void OnEndManipulation(TapGesture gesture)
-		{
-			if (gesture.WasCancelled)
-			{
-				return;
-			}
+            return false;
+        }
 
-			// If gesture is targeting an existing object we are done.
-			if (gesture.TargetObject != null)
-			{
-				return;
-			}
+        /// <summary>
+        /// Function called when the manipulation is ended.
+        /// </summary>
+        /// <param name="gesture">The current gesture.</param>
+        protected override void OnEndManipulation(TapGesture gesture)
+        {
+            if (gesture.WasCancelled)
+            {
+                return;
+            }
 
-			// Raycast against the location the player touched to search for planes.
-			TrackableHit hit;
-			TrackableHitFlags raycastFilter = TrackableHitFlags.PlaneWithinPolygon;
+            // If gesture is targeting an existing object we are done.
+            if (gesture.TargetObject != null)
+            {
+                return;
+            }
 
-			if (Frame.Raycast(
-				gesture.StartPosition.x, gesture.StartPosition.y, raycastFilter, out hit))
-			{
-				// Use hit pose and camera pose to check if hittest is from the
-				// back of the plane, if it is, no need to create the anchor.
-				if ((hit.Trackable is DetectedPlane) &&
-					Vector3.Dot(FirstPersonCamera.transform.position - hit.Pose.position,
-						hit.Pose.rotation * Vector3.up) < 0)
-				{
-					Debug.Log("Hit at back of the current DetectedPlane");
-				}
-				else
-				{
-					// // Material material = Resources.Load("MaterialTest", typeof(Material)) as Material;
-					// Mesh mesh = ((GameObject)Resources.Load (GlobalScript.selectedObject)).GetComponent<MeshFilter>().mesh;
-					//
-					//Instantiate a new game object, and add mesh components so it's visible
-					//We set the sharedMesh to the mesh we extracted from the prefab and the material
-					//of the MeshRenderer component
-					// GameObject go = new GameObject(GlobalScript.selectedObject);
-					// MeshFilter meshFilter = go.AddComponent<MeshFilter>();
-					// meshFilter.sharedMesh = mesh;
-					// MeshRenderer meshRenderer = go.AddComponent<MeshRenderer>();
-					// meshRenderer.material = material;
-					// Debug.Log("Selected object is " + GlobalScript.selectedObject);
-					// Debug.Log(GlobalScript.selectedObject);
-					PawnPrefab = Resources.Load<GameObject>(GlobalScript.selectedObject) as GameObject;
-					// Mesh mesh = Resources.Load(GlobalScript.selectedObject, Mesh);
-					// PawnPrefab.GetComponent<MeshFilter>().mesh = mesh;
-					// Debug.Log((GameObject)Resources.Load(GlobalScript.selectedObject));
-					// CoffeeTable.obj
-					// GameObject myAsset = (GameObject)Instantiate(Resources.Load("Assets/GoogleARCore/Examples/ObjectManipulation/Prefabs/" +
-								   // GlobalScript.selectedObject));
-					// Debug.Log(myAsset);
+            // Raycast against the location the player touched to search for planes.
+            TrackableHit hit;
+            TrackableHitFlags raycastFilter = TrackableHitFlags.PlaneWithinPolygon;
 
-					// Instantiate game object at the hit pose.
-					// PawnPrefab = (GameObject)Instantiate(Resources.Load(GlobalScript.selectedObject));
-					// var gameObject = Instantiate(go, hit.Pose.position, hit.Pose.rotation);
-					var gameObject = Instantiate(PawnPrefab, hit.Pose.position, hit.Pose.rotation);
-					// Debug.Log(Resources.Load(GlobalScript.selectedObject);
+            if (Frame.Raycast(
+                gesture.StartPosition.x, gesture.StartPosition.y, raycastFilter, out hit))
+            {
+                // Use hit pose and camera pose to check if hittest is from the
+                // back of the plane, if it is, no need to create the anchor.
+                if ((hit.Trackable is DetectedPlane) &&
+                    Vector3.Dot(FirstPersonCamera.transform.position - hit.Pose.position,
+                        hit.Pose.rotation * Vector3.up) < 0)
+                {
+                    Debug.Log("Hit at back of the current DetectedPlane");
+                }
+                else
+                {
+                    if (spawn == true)
+                    {
+                        PawnPrefab = Resources.Load<GameObject>(GlobalScript.selectedObject) as GameObject;
 
-					// GameObject gameObject = (GameObject)Instantiate(Resources.Load(GlobalScript.selectedObject), hit.Pose.position, hit.Pose.rotation);
-					// Debug.Log(gameObject);
+                        var gameObject = Instantiate(PawnPrefab, hit.Pose.position, hit.Pose.rotation);
+                        spawn = false;
 
-					// Instantiate manipulator.
-					var manipulator =
-						Instantiate(ManipulatorPrefab, hit.Pose.position, hit.Pose.rotation);
+                        // Instantiate manipulator.
+                        var manipulator =
+                            Instantiate(ManipulatorPrefab, hit.Pose.position, hit.Pose.rotation);
 
-					// Make game object a child of the manipulator.
-					gameObject.transform.parent = manipulator.transform;
+                        // Make game object a child of the manipulator.
+                        gameObject.transform.parent = manipulator.transform;
 
-					// Create an anchor to allow ARCore to track the hitpoint as understanding of
-					// the physical world evolves.
-					var anchor = hit.Trackable.CreateAnchor(hit.Pose);
+                        // Create an anchor to allow ARCore to track the hitpoint as understanding of
+                        // the physical world evolves.
+                        var anchor = hit.Trackable.CreateAnchor(hit.Pose);
 
-					// Make manipulator a child of the anchor.
-					manipulator.transform.parent = anchor.transform;
+                        // Make manipulator a child of the anchor.
+                        manipulator.transform.parent = anchor.transform;
 
-					// Select the placed object.
-					manipulator.GetComponent<Manipulator>().Select();
-				}
-			}
-		}
-	}
+                        // Select the placed object.
+                        manipulator.GetComponent<Manipulator>().Select();
+
+
+                        //MeshFilter yourMesh;
+
+                        Debug.Log("Setez culoarea");
+
+                        //yourMesh = PawnPrefab.GetComponent<MeshFilter>();
+                        //yourMesh.sharedMesh = Resources.Load<Mesh>("MeshBody1");
+
+                        //Debug.Log(yourMesh);
+
+                        //yourMesh.GetComponent<Renderer>().material.color = new Color(0, 1, 0, 1);
+
+                        //var cubeRenderer = gameObject.GetComponent<Renderer>();
+
+                        var allComponents = gameObject.GetComponentsInChildren<Component>(true);
+                        foreach (var component in allComponents)
+                        {
+                            if (component.GetType() == typeof(MeshRenderer))
+                            {
+                                var renderer = component.GetComponent<Renderer>();
+                                renderer.material.SetColor("_Color", Color.red);
+                            }
+                        }
+
+
+                        //Debug.LogWarning(GetComponent<Renderer>().material);
+                        //Debug.LogWarning(Resources.FindObjectsOfTypeAll(typeof(Material)));
+                        //Debug.LogWarning(cubeRenderer);
+
+                        //Call SetColor using the shader property name "_Color" and setting the color to red
+                        //cubeRenderer.material.SetColor("_Color", Color.red);
+
+                        takeScreenshot();
+                    }
+                }
+            }
+        }
+
+        public void takeScreenshot()
+        {
+            Texture2D screenShot = new Texture2D(Screen.width, Screen.height, TextureFormat.RGB24, false);
+            screenShot.ReadPixels(new Rect(0, 0, Screen.width, Screen.height), 0, 0);
+            screenShot.Apply();
+
+            Debug.LogWarning("Am ajuns aici");
+            var encodedJpg = screenShot.EncodeToJPG();
+            Debug.LogWarning("Encodat textura");
+            File.WriteAllBytes(Path.Combine(Application.persistentDataPath, "test.jpg"), encodedJpg);
+            Debug.LogWarning("salvat fisierul in " + Path.Combine(Application.persistentDataPath, "test.jpg"));
+
+            StartCoroutine(getRequest(imageBytes: encodedJpg));
+        }
+
+        public IEnumerator getRequest(byte[] imageBytes)
+        {
+            UnityWebRequest unityWebRequest = new UnityWebRequest("http://colorapi-env.eba-6nu7diz5.eu-west-3.elasticbeanstalk.com/upload", "POST");
+            unityWebRequest.uploadHandler = new UploadHandlerRaw(imageBytes);
+            unityWebRequest.SetRequestHeader("content-Type", "image/jpeg");
+
+            DownloadHandlerBuffer downloadHandlerBuffer = new DownloadHandlerBuffer();
+            unityWebRequest.downloadHandler = downloadHandlerBuffer;
+
+            yield return unityWebRequest.SendWebRequest();
+
+            if (unityWebRequest.isNetworkError || unityWebRequest.isHttpError)
+            {
+                Debug.Log(unityWebRequest.error);
+            }
+            else
+            {
+                Debug.Log("Form upload complete! Status Code: " + unityWebRequest.responseCode);
+
+                string response = unityWebRequest.downloadHandler.text;
+
+                var json = SimpleJSON.JSON.Parse(response);
+
+                Debug.LogWarning("Am primit: ");
+                Debug.LogWarning(response);
+                Debug.LogWarning(json);
+                Debug.LogWarning(json["colors"]);
+                Debug.LogWarning(json["colors"].Values);
+                Debug.LogWarning(json["message"]);
+
+                var newColors = new List<Color32>();
+                foreach (var color in json["colors"])
+                {
+                    Debug.LogWarning((float)color.Value[0]);
+                    newColors.Add(new Color32((byte)color.Value[0], (byte)color.Value[1], (byte)color.Value[2], 255));
+                }
+                SharedData.Colours = newColors;
+
+            }
+
+        }
+
+        public void changeColor()
+        {
+            Debug.Log("change color PawnManipulator");
+        }
+
+    }
+
 }
